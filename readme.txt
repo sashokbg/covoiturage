@@ -1,0 +1,4 @@
+-single page application
+-nosql (mongo db)
+-angular (extends html)
+-twitter bs
