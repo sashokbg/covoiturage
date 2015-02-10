@@ -13,7 +13,7 @@
 	<bean id="placeholderConfig"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>/WEB-INF/conf/database.properties</value>
+			<value>classpath:database.properties</value>
 		</property>
 	</bean>
 
@@ -31,8 +31,9 @@
 
 	<!-- Hibernate SessionFactory -->
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="bg.alexander.model.*"/>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
@@ -42,5 +43,11 @@
 			</props>
 		</property>
 	</bean>
+	
+	 <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
 
 </beans>

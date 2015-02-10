@@ -2,19 +2,34 @@ package bg.alexander.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST")
+@Table(name="USER")
 public class User {
 	@Id @GeneratedValue
     @Column(name = "id")
     private Integer id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PATH_ID", nullable = false)
+	private Path path;
+	
+	public Path getPath() {
+		return path;
+	}
+
+	public void setPath(Path path) {
+		this.path = path;
+	}
+
 	@Column(name = "name")
-	String name;
+	private String name;
 
 	public Integer getId() {
 		return id;
