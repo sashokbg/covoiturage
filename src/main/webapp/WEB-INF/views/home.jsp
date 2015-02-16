@@ -11,7 +11,12 @@
 	Welcome Home:
 
 	<c:forEach items="${usersList}" var="user">
-		<br />[${user.id}] ${user.name} - travels from ${user.path.startPoint} to ${user.path.endPoint}
+		
+		<br />[${user.id}] ${user.firstName} ${user.lastName} ${user.birthDay} ${user.gender}
+		Roles:
+		<c:forEach items="${user.roles}" var="role">
+			${role.name}
+		</c:forEach>
 	</c:forEach>
 </body>
 </html>

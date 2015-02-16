@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>bg.alexander</groupId>
-	<artifactId>covoiturage</artifactId>
+	<artifactId>schedule</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Co-Voiturage Maven Webapp</name>
+	<name>schedule Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<!-- Only certain versions of Spring and Hibernate are compatible ! -->
@@ -16,7 +16,7 @@
 	</properties>
 
 	<build>
-		<finalName>covoiturage</finalName>
+		<finalName>schedule</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
