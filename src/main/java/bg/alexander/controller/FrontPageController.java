@@ -7,12 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import bg.alexander.services.UsersService;
+import bg.alexander.services.UserService;
 
 @Controller
 public class FrontPageController {
 	@Autowired
-	private UsersService userService;
+	private UserService userService;
 	private Logger log = Logger.getLogger(FrontPageController.class);
 
 	@RequestMapping(value="/home",method=RequestMethod.GET)

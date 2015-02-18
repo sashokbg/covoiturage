@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,10 +23,12 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private Date birthDay;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name="gender_id")
 	private Gender gender;
-	@OneToMany
+	
+	//TODO change to lazy ? OpenSessionInView ?
+	@OneToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="USER_ROLES",
             joinColumns = @JoinColumn( name="USER_ID"),
