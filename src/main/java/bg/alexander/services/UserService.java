@@ -21,6 +21,10 @@ public class UserService {
 	public User getUser(Integer id){
 		return userDao.getById(id);
 	}
+
+	public List<User> list() {
+		return userDao.list();
+	}
 	
 	//TODO
 //	public List<User> getAllUsersBornBefore(Date date){

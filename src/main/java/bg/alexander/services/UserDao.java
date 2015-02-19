@@ -2,6 +2,7 @@ package bg.alexander.services;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserDao implements GenerictDaoInterface<User>{
 	
 	@Override
 	public List<User> list(){
-		List<User> users = (List<User>)sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		List<User> users = (List<User>)sessionFactory.getCurrentSession().createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return users;
 	}
 	

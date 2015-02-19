@@ -3,7 +3,6 @@ package bg.alexander.model.user;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class Project {
 	private Date end;
 	@OneToOne
 	private User creator;
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="PROJECT_USERS",
             joinColumns = @JoinColumn( name="PROJECT_ID"),

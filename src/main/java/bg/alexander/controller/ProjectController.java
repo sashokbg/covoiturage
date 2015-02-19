@@ -6,6 +6,7 @@ import java.util.Set;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,8 @@ public class ProjectController {
 	private SessionFactory sessionFactory;
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String createProjectGet(){
+	public String createProjectGet(Model model){
+		model.addAttribute("users",userService.list());
 		return "project/create";
 	}
 	
@@ -42,9 +44,14 @@ public class ProjectController {
 		}
 		
 		project.setAssignedUsers(assignedUsersSet);
-		
 		projectService.saveOrUpdate(project);
 		
-		return "project/create";
+		return "redirect:/project/list";
+	}
+	
+	@RequestMapping(value="list")
+	public String listProjects(Model model){
+		model.addAttribute("projects",projectService.list());
+		return "/project/list";
 	}
 }

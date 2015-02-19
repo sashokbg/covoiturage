@@ -13,13 +13,18 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
 
+	<!-- Configures @Controller, @RequestMapping and so on -->
 	<mvc:annotation-driven />
+	<!-- Maps the location /resources/ to any request starting with /resources/ ex. /resources/js/jQuery.js -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<!-- Allows @Transactional. Attention this declaration should be used in the same context as <mvc:annotationDriven> other ways it does not work -->
 	<tx:annotation-driven/>
-    <context:component-scan base-package="bg.alexander.*"/>
+	<!-- Allows @Autowired -->	
     <context:annotation-config />
+	<!-- Scan @Component and @Service for autowiring candidates -->
+    <context:component-scan base-package="bg.alexander.*"/>
 
-	<!-- Spring i18n -->
+	<!-- Spring i18n message bundle "reader" -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:messages" />
@@ -31,6 +36,7 @@
 		<property name="defaultLocale" value="en" />
 	</bean>
 
+	<!-- Resolve locale as request attribute. Ex /my-url.html?locale=en_us -->
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="locale" />
@@ -38,8 +44,7 @@
 	</mvc:interceptors>
 	<!-- END Spring i18n -->
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
 		</property>

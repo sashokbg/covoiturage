@@ -2,6 +2,7 @@ package bg.alexander.services;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import bg.alexander.model.user.Project;
 
 @Component
+@SuppressWarnings("unchecked")
 public class ProjectDao implements GenerictDaoInterface<Project> {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -29,8 +31,7 @@ public class ProjectDao implements GenerictDaoInterface<Project> {
 
 	@Override
 	public List<Project> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createCriteria(Project.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
 	@Override
