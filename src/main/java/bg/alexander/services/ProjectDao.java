@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,11 @@ public class ProjectDao implements GenerictDaoInterface<Project> {
 
 	@Override
 	public List<Project> list() {
-		return sessionFactory.getCurrentSession().createCriteria(Project.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return sessionFactory.getCurrentSession().
+				createCriteria(Project.class).
+				setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).
+				addOrder(Order.desc("id")).
+				list();
 	}
 
 	@Override
