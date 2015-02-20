@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import bg.alexander.services.UserService;
 
 @Controller
-public class FrontPageController {
+@RequestMapping(value="/users")
+public class UsersController {
 	@Autowired
 	private UserService userService;
-	private Logger log = Logger.getLogger(FrontPageController.class);
+	private Logger log = Logger.getLogger(UsersController.class);
 
-	@RequestMapping(value="/home",method=RequestMethod.GET)
+	@RequestMapping(value="list",method=RequestMethod.GET)
 	public String showHomePage(Model model){
-		log.info("called 1");
 		model.addAttribute("usersList",userService.getAllUsers());
-		return "home";
-	}
-	
-	@RequestMapping(value="/test",method=RequestMethod.GET)
-	public String show(Model model){
-		log.info("called 2");
-		model.addAttribute(userService.getAllUsers());
-		return "home";
+		return "users/list";
 	}
 }

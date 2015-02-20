@@ -17,7 +17,7 @@ import bg.alexander.services.ProjectService;
 import bg.alexander.services.UserService;
 
 @Controller
-@RequestMapping("/project")
+@RequestMapping("/projects")
 public class ProjectController {
 	@Autowired
 	private UserService userService;
@@ -29,7 +29,7 @@ public class ProjectController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createProjectGet(Model model){
 		model.addAttribute("users",userService.list());
-		return "project/create";
+		return "projects/create";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
@@ -46,12 +46,12 @@ public class ProjectController {
 		project.setAssignedUsers(assignedUsersSet);
 		projectService.saveOrUpdate(project);
 		
-		return "redirect:/project/list";
+		return "redirect:/projects/list";
 	}
 	
 	@RequestMapping(value="list")
 	public String listProjects(Model model){
 		model.addAttribute("projects",projectService.list());
-		return "/project/list";
+		return "projects/list";
 	}
 }
