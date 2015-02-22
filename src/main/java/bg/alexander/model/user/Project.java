@@ -11,17 +11,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Project {
 	//TODO move to different package
-	
 	//TODO change to long
 	@Id @GeneratedValue
 	private Integer id;
+	@Size(min=2, max=256)
+	@NotBlank
 	private String name;
+	@NotNull
 	private Date start;
+	@NotNull
 	private Date end;
+	@NotNull
 	@OneToOne
 	private User creator;
 	@OneToMany(fetch=FetchType.EAGER)
@@ -30,6 +40,7 @@ public class Project {
             joinColumns = @JoinColumn( name="PROJECT_ID"),
             inverseJoinColumns = @JoinColumn( name="USER_ID")
     )
+	@NotNull
 	private Set<User> assignedUsers;
 	
 	public Project() {
@@ -55,6 +66,7 @@ public class Project {
 		return start;
 	}
 
+	@DateTimeFormat
 	public void setStart(Date start) {
 		this.start = start;
 	}
@@ -63,6 +75,7 @@ public class Project {
 		return end;
 	}
 
+	@DateTimeFormat
 	public void setEnd(Date end) {
 		this.end = end;
 	}

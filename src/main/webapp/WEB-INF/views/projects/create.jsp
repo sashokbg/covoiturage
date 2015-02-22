@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+    prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -36,22 +38,22 @@
 			<spring:message code="project.form.title" />
 		</h2>
 
-		<form role="form" action="<c:url value="/project/create.do" />"
-			method="post">
+		<form:form role="form" action="${pageContext.request.contextPath}/projects/create.do" method="post" commandName="project">
 			<div class="form-group">
-				<label for="project-name"><spring:message
-						code="project.form.name" />:</label> <input id="project-name" type="text"
-					name="name" />
+				<form:errors path="name" cssClass="error" />
+				<label for="project-name">
+				<spring:message code="project.form.name" />:</label> <input id="project-name" type="text" name="name" />
 			</div>
 			<div class="form-group">
-				<label for="project-creator"><spring:message
-						code="project.form.creator" />:</label> <input id="project-creator"
-					type="text" name="creatorId" />
+				<form:errors path="creator" cssClass="error" />
+				<label for="project-creator">
+				<spring:message code="project.form.creator" />:</label> <input id="project-creator" type="text" name="creatorId" />
 			</div>
 			<div class="form-group">
-				<label for="project-users"><spring:message
-						code="project.form.assigned.users" />:</label> <select id="project-users"
-					multiple name="assignedUsersIds">
+				<form:errors path="assignedUsers" cssClass="error" />
+				<label for="project-users">
+				<spring:message code="project.form.assigned.users" />:</label>
+				<select id="project-users" multiple name="assignedUsersIds">
 					<c:forEach items="${users}" var="user">
 						<option value="${user.id}">${user.firstName}
 							${user.lastName}</option>
@@ -59,21 +61,23 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="project-start"><spring:message
-						code="project.form.start" />:</label> <input id="project-start"
-					class="date-picker" type="text" name="start" />
+				<form:errors path="start" cssClass="error" />
+				<label for="project-start">
+				<spring:message code="project.form.start" />:</label>
+				<input id="project-start" class="date-picker" type="text" name="start" />
 			</div>
 			<div class="form-group">
-				<label for="project-end"><spring:message
-						code="project.form.end" />:</label> <input id="project-end"
-					class="date-picker" type="text" name="end" />
+				<form:errors path="end" cssClass="error" />
+				<label for="project-end">
+				<spring:message code="project.form.end" />:</label>
+				<input id="project-end" class="date-picker" type="text" name="end" />
 			</div>
 			<div class="form-group">
 				<label for="project-submit"><spring:message
 						code="project.form.submit" />:</label> <input id="project-submit"
 					class="btn btn-default" type="submit" />
 			</div>
-		</form>
+		</form:form>
 	</div>
 </body>
 </html>
