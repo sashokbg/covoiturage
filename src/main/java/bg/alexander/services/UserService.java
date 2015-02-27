@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import bg.alexander.model.user.Role;
 import bg.alexander.model.user.User;
 
 @Service
@@ -13,6 +14,8 @@ import bg.alexander.model.user.User;
 public class UserService {
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private RoleDao roleDao;
 	
 	public List<User> getAllUsers(){
 		return userDao.list();
@@ -26,6 +29,13 @@ public class UserService {
 		return userDao.list();
 	}
 	
+	public List<Role> listRoles(){
+		return roleDao.list();
+	}
+	
+	public User saveOrUpdate(User user){
+		return userDao.saveOrUpdate(user);
+	}
 	//TODO
 //	public List<User> getAllUsersBornBefore(Date date){
 //		List<User> users = (List<User>)sessionFactory.getCurrentSession().
@@ -33,4 +43,8 @@ public class UserService {
 //				.list();
 //		return users;
 //	}
+
+	public Role getRole(Integer roleId) {
+		return roleDao.getById(roleId);
+	}
 }

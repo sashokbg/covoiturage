@@ -29,17 +29,9 @@ public class UserDao implements GenerictDaoInterface<User>{
 		return user;
 	}
 	
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	@Override
 	public User saveOrUpdate(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		sessionFactory.getCurrentSession().save(entity);
+		return entity;
 	}
 }

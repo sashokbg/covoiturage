@@ -1,7 +1,7 @@
 package bg.alexander.model.user;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,13 +34,13 @@ public class User {
             joinColumns = @JoinColumn( name="USER_ID"),
             inverseJoinColumns = @JoinColumn( name="ROLE_ID")
     )
-	private Set<Role> roles;
+	private List<Role> roles;
 	
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
