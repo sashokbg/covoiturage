@@ -1,4 +1,4 @@
-package bg.alexander.services;
+package bg.alexander.services.user;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import bg.alexander.model.user.Role;
+import bg.alexander.services.GenerictDaoInterface;
 
 @SuppressWarnings("unchecked")
 @Component

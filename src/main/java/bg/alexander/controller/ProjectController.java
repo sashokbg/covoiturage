@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import bg.alexander.model.user.Project;
+import bg.alexander.model.project.Project;
 import bg.alexander.model.user.User;
-import bg.alexander.services.ProjectService;
-import bg.alexander.services.UserService;
+import bg.alexander.services.project.ProjectService;
+import bg.alexander.services.user.UserService;
 
 @Controller
 @RequestMapping("/projects")
@@ -36,11 +36,11 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String createProjectPost(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult, Model model, Integer creatorId, String assignedUsersIds){
+	public String createProjectPost(@ModelAttribute("project") Project project, BindingResult bindingResult, Model model, Integer creatorId, String assignedUsersIds){
 		model.addAttribute("users",userService.list());
-		if (bindingResult.hasErrors()) {
-			return "/projects/create";
-        }
+//		if (bindingResult.hasErrors()) {
+//			return "/projects/create";
+//        }
 		User creator = userService.getUser(creatorId);
 		project.setCreator(creator);
 		

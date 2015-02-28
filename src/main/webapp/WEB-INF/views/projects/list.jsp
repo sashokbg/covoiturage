@@ -30,6 +30,7 @@
 						<th>Name</th>
 						<th>Start Date</th>
 						<th>End Date</th>
+						<th>Tasks</th>
 						<th>Creator</th>
 						<th>Users</th>
 					</tr>
@@ -40,6 +41,17 @@
 						<td>${project.name}</td>
 						<td><fmt:formatDate type="both" value="${project.start}" /></td>
 						<td><fmt:formatDate type="both" value="${project.end}" /></td>
+						<td>
+							<table>
+								<c:forEach items="${project.tasks}" var="task">
+									<tr>
+										<td>
+											${task.name}
+										</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</td>
 						<td>${project.creator.firstName}-${project.creator.lastName}</td>
 						<td>
 							<table>

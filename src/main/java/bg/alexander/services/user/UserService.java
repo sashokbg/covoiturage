@@ -1,4 +1,4 @@
-package bg.alexander.services;
+package bg.alexander.services.user;
 
 import java.util.List;
 

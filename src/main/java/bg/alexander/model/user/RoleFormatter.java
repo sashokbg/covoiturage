@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
-import bg.alexander.services.UserService;
+import bg.alexander.services.user.UserService;
 
 @Component("roleFormatter")
 public class RoleFormatter implements Formatter<Role>{

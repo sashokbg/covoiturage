@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import bg.alexander.model.user.Gender;
 import bg.alexander.model.user.User;
-import bg.alexander.services.UserService;
+import bg.alexander.services.user.UserService;
 
 @Controller
 @RequestMapping(value="/users")
