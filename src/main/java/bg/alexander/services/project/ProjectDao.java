@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,8 +42,8 @@ public class ProjectDao implements GenerictDaoInterface<Project> {
 	}
 
 	@Override
-	public Project getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Project getById(Long id) {
+		return (Project) sessionFactory.getCurrentSession().
+				createCriteria(Project.class).add(Restrictions.eq("id", id)).uniqueResult();
 	}
 }

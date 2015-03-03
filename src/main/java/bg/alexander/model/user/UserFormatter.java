@@ -9,17 +9,19 @@ import org.springframework.stereotype.Component;
 
 import bg.alexander.services.user.UserService;
 
-@Component("roleFormatter")
-public class RoleFormatter implements Formatter<Role>{
+@Component("userFormatter")
+public class UserFormatter implements Formatter<User>{
 	@Autowired
 	private UserService userService;
 	
 	@Override
-	public String print(Role role, Locale str) {
-		return String.valueOf(role);
+	public String print(User user, Locale locale) {
+		return user.toString();
 	}
+
 	@Override
-	public Role parse(String id, Locale locale) throws ParseException {
-		return userService.getRole(Long.valueOf(id));
+	public User parse(String userId, Locale locale) throws ParseException {
+		User user = userService.getUser(Long.valueOf(userId)); 
+		return user;
 	}
 }

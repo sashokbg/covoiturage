@@ -24,4 +24,7 @@ public class ProjectService {
 		return result;
 	}
 
+	public Project getProject(Long byId){
+		return projectDao.getById(byId);
+	}
 }

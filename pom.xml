@@ -70,11 +70,6 @@
 		</dependency>
 		<!-- ### END - Main J2EE Web App Dependencies ### -->
 		<!-- ### VIEW Dependencies ### -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.tiles</groupId> -->
-<!-- 			<artifactId>tiles-extras</artifactId> -->
-<!-- 			<version>${tiles.version}</version> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>

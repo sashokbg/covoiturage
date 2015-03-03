@@ -1,6 +1,7 @@
 package bg.alexander.services.user;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class UserService {
 		return userDao.list();
 	}
 	
-	public User getUser(Integer id){
+	public User getUser(Long id){
 		return userDao.getById(id);
 	}
 
@@ -29,8 +30,8 @@ public class UserService {
 		return userDao.list();
 	}
 	
-	public List<Role> listRoles(){
-		return roleDao.list();
+	public Set<Role> listRoles(){
+		return roleDao.getAllRoles();
 	}
 	
 	public User saveOrUpdate(User user){
@@ -44,7 +45,7 @@ public class UserService {
 //		return users;
 //	}
 
-	public Role getRole(Integer roleId) {
+	public Role getRole(Long roleId) {
 		return roleDao.getById(roleId);
 	}
 }

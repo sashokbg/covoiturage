@@ -1,8 +1,5 @@
 package bg.alexander.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.Valid;
 
 import org.hibernate.SessionFactory;
@@ -15,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import bg.alexander.model.project.Project;
-import bg.alexander.model.user.User;
 import bg.alexander.services.project.ProjectService;
 import bg.alexander.services.user.UserService;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectController {
+public class ProjectsController {
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -32,25 +28,16 @@ public class ProjectController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createProjectGet(Model model){
 		model.addAttribute("users",userService.list());
+		model.addAttribute(new Project());
 		return "projects/create";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String createProjectPost(@ModelAttribute("project") Project project, BindingResult bindingResult, Model model, Integer creatorId, String assignedUsersIds){
+	public String createProjectPost(@Valid @ModelAttribute("project") Project project, BindingResult bindingResult, Model model){
 		model.addAttribute("users",userService.list());
-//		if (bindingResult.hasErrors()) {
-//			return "/projects/create";
-//        }
-		User creator = userService.getUser(creatorId);
-		project.setCreator(creator);
-		
-		//get assigned users
-		Set<User> assignedUsersSet = new HashSet<User>();
-		for(String userId : assignedUsersIds.split(",")){
-			assignedUsersSet.add(userService.getUser(Integer.valueOf(userId)));
+		if(bindingResult.hasErrors()){
+			return "projects/create";
 		}
-		
-		project.setAssignedUsers(assignedUsersSet);
 		projectService.saveOrUpdate(project);
 		
 		return "redirect:/projects/list";
