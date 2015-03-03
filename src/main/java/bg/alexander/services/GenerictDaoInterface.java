@@ -6,5 +6,5 @@ public interface GenerictDaoInterface<E> {
 
 	public E saveOrUpdate(E entity);
 	public List<E> list();
-	public E getById(Integer id);
+	public E getById(Long id);
 }

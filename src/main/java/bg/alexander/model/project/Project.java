@@ -1,7 +1,6 @@
 package bg.alexander.model.project;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,18 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import bg.alexander.model.user.User;
 
-import com.sun.istack.internal.NotNull;
-
 @Entity
 public class Project {
-	//TODO move to different package
 	//TODO change to long
 	@Id @GeneratedValue
 	private Integer id;

@@ -19,13 +19,15 @@ public class UserDao implements GenerictDaoInterface<User>{
 	
 	@Override
 	public List<User> list(){
-		List<User> users = (List<User>)sessionFactory.getCurrentSession().createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		List<User> users = (List<User>)sessionFactory.getCurrentSession().createCriteria(User.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		return users;
 	}
 	
-	public User getById(Integer byId){
+	public User getById(Long byId){
 		User user = (User)sessionFactory.getCurrentSession().
-				createCriteria(User.class).add(Restrictions.eq("id", byId)).uniqueResult();
+				createCriteria(User.class)
+				.add(Restrictions.eq("id", byId)).uniqueResult();
 		
 		return user;
 	}

@@ -47,13 +47,13 @@
 			<div class="form-group">
 				<form:errors path="creator" cssClass="error" />
 				<label for="project-creator">
-				<spring:message code="project.form.creator" />:</label> <input id="project-creator" type="text" name="creatorId" />
+				<spring:message code="project.form.creator" />:</label> <input id="project-creator" type="text" name="creator" />
 			</div>
 			<div class="form-group">
 				<form:errors path="assignedUsers" cssClass="error" />
 				<label for="project-users">
 				<spring:message code="project.form.assigned.users" />:</label>
-				<select id="project-users" multiple name="assignedUsersIds">
+				<select id="project-users" multiple name="assignedUsers">
 					<c:forEach items="${users}" var="user">
 						<option value="${user.id}">${user.firstName}
 							${user.lastName}</option>

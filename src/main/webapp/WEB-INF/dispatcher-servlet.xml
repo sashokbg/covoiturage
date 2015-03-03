@@ -17,6 +17,7 @@
 	      <property name="formatters">
 	           <set>
 	                 <ref bean="roleFormatter"/>
+	                 <ref bean="userFormatter"/>
 	           </set>
 	      </property>
 	</bean>
