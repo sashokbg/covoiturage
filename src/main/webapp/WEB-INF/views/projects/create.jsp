@@ -8,26 +8,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
-<script src="<c:url value="/resources/js/jquery-ui.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
-<script src="<c:url value="/resources/js/chosen.jquery.js" />"></script>
-
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/jquery-ui.css" />" />
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.css" />" />
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap-theme.css" />" />
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/chosen.css" />" />
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title><spring:message code="project.form.browser.title" /></title>
-
+	<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
+	<script src="<c:url value="/resources/js/jquery-ui.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
+	<script src="<c:url value="/resources/js/chosen.jquery.js" />"></script>
+	
+	<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css" />" />
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.css" />" />
+	<link rel="stylesheet" href="<c:url value="/resources/css/chosen.css" />" />
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title><spring:message code="project.form.browser.title" /></title>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.date-picker').datepicker();
+			$('.date-picker').datepicker({dateFormat: "dd/mm/yy"});
 			$('#project-users').chosen();
 		});
 	</script>
@@ -45,6 +40,12 @@
 				<spring:message code="project.form.name" />:</label> <input id="project-name" type="text" name="name" />
 			</div>
 			<div class="form-group">
+				<form:errors path="code" cssClass="error" />
+				<label for="project-code">
+				<spring:message code="project.form.code" />:</label>
+				<input id="project-code" type="text" name="code" />
+			</div>
+			<div class="form-group">
 				<form:errors path="creator" cssClass="error" />
 				<label for="project-creator">
 				<spring:message code="project.form.creator" />:</label> <input id="project-creator" type="text" name="creator" />
@@ -53,12 +54,9 @@
 				<form:errors path="assignedUsers" cssClass="error" />
 				<label for="project-users">
 				<spring:message code="project.form.assigned.users" />:</label>
-				<select id="project-users" multiple name="assignedUsers">
-					<c:forEach items="${users}" var="user">
-						<option value="${user.id}">${user.firstName}
-							${user.lastName}</option>
-					</c:forEach>
-				</select>
+				<form:select id="project-users" path="assignedUsers" multiple="true">
+					<form:options items="${users}" itemValue="id" />
+				</form:select>
 			</div>
 			<div class="form-group">
 				<form:errors path="start" cssClass="error" />
@@ -73,9 +71,9 @@
 				<input id="project-end" class="date-picker" type="text" name="end" />
 			</div>
 			<div class="form-group">
-				<label for="project-submit"><spring:message
-						code="project.form.submit" />:</label> <input id="project-submit"
-					class="btn btn-default" type="submit" />
+				<label for="project-submit">
+				<spring:message code="project.form.submit" />:</label>
+				<input id="project-submit" class="btn btn-default" type="submit" />
 			</div>
 		</form:form>
 	</div>

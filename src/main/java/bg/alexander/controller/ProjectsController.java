@@ -7,14 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import bg.alexander.model.project.Project;
-import bg.alexander.model.validation.ProjectValidator;
 import bg.alexander.services.project.ProjectService;
 import bg.alexander.services.user.UserService;
 
@@ -27,17 +24,11 @@ public class ProjectsController {
 	private ProjectService projectService;
 	@Autowired
 	private SessionFactory sessionFactory;
-	@Autowired
-	private ProjectValidator projectValidator;
-	
-	@InitBinder
-	public void initBinder(WebDataBinder binder){
-		binder.setValidator(projectValidator);
-	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createProjectGet(Model model){
 		model.addAttribute("users",userService.list());
+		model.addAttribute(new Project());
 		return "projects/create";
 	}
 	

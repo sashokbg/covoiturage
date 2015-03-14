@@ -28,6 +28,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Name</th>
+						<th>Code</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Tasks</th>
@@ -39,6 +40,7 @@
 					<tr>
 						<td>${project.id}</td>
 						<td>${project.name}</td>
+						<td>${project.code}</td>
 						<td><fmt:formatDate type="both" value="${project.start}" /></td>
 						<td><fmt:formatDate type="both" value="${project.end}" /></td>
 						<td>

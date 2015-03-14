@@ -11,16 +11,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import bg.alexander.model.user.User;
+import bg.alexander.model.validation.ValidProject;
 
 @Entity
+@ValidProject
 public class Project {
 	//TODO change to long
 	@Id @GeneratedValue
 	private Integer id;
+	@Min(2)
 	private String name;
+	
+	private String code;
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date start;
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date end;
 	@OneToOne
 	private User creator;
@@ -95,5 +108,13 @@ public class Project {
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+	
+	public void setCode(String code) {
+		this.code = code;
 	}
 }
