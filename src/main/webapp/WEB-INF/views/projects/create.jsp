@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
 	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.css" />" />
 	<link rel="stylesheet" href="<c:url value="/resources/css/chosen.css" />" />
+	<link rel="stylesheet" href="<c:url value="/resources/css/common.css" />" />
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title><spring:message code="project.form.browser.title" /></title>
@@ -33,42 +34,44 @@
 			<spring:message code="project.form.title" />
 		</h2>
 
-		<form:form role="form" action="${pageContext.request.contextPath}/projects/create.do" method="post" commandName="project">
+		<form:form role="form" modelAttribute="project" action="${pageContext.request.contextPath}/projects/create.do" method="post">
 			<div class="form-group">
-				<form:errors path="name" cssClass="error" />
 				<label for="project-name">
-				<spring:message code="project.form.name" />:</label> <input id="project-name" type="text" name="name" />
+				<spring:message code="project.form.name" />:</label>
+				<form:input id="project-name" type="text" path="name" />
+				<form:errors path="name" cssClass="error" />
 			</div>
 			<div class="form-group">
-				<form:errors path="code" cssClass="error" />
 				<label for="project-code">
 				<spring:message code="project.form.code" />:</label>
-				<input id="project-code" type="text" name="code" />
+				<form:input id="project-code" type="text" path="code" />
+				<form:errors path="code" cssClass="error" />
 			</div>
 			<div class="form-group">
-				<form:errors path="creator" cssClass="error" />
 				<label for="project-creator">
-				<spring:message code="project.form.creator" />:</label> <input id="project-creator" type="text" name="creator" />
+				<spring:message code="project.form.creator" />:</label>
+				<form:input id="project-creator" type="text" path="creator" />
+				<form:errors path="creator" cssClass="error" />
 			</div>
 			<div class="form-group">
-				<form:errors path="assignedUsers" cssClass="error" />
 				<label for="project-users">
 				<spring:message code="project.form.assigned.users" />:</label>
 				<form:select id="project-users" path="assignedUsers" multiple="true">
 					<form:options items="${users}" itemValue="id" />
 				</form:select>
+				<form:errors path="assignedUsers" cssClass="error" />
 			</div>
 			<div class="form-group">
-				<form:errors path="start" cssClass="error" />
 				<label for="project-start">
 				<spring:message code="project.form.start" />:</label>
-				<input id="project-start" class="date-picker" type="text" name="start" />
+				<form:input id="project-start" class="date-picker" type="text" path="start" />
+				<form:errors path="start" cssClass="error" />
 			</div>
 			<div class="form-group">
-				<form:errors path="end" cssClass="error" />
 				<label for="project-end">
 				<spring:message code="project.form.end" />:</label>
-				<input id="project-end" class="date-picker" type="text" name="end" />
+				<form:input id="project-end" class="date-picker" type="text" path="end" />
+				<form:errors path="end" cssClass="error" />
 			</div>
 			<div class="form-group">
 				<label for="project-submit">

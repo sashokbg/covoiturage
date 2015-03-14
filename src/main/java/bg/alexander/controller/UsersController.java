@@ -39,7 +39,8 @@ public class UsersController {
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String createUserPost(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model){
 		if (bindingResult.hasErrors()) {
-			return "/users/create";
+			model.addAttribute("user",user);
+			return "users/create";
         }
 		
 		userService.saveOrUpdate(user);

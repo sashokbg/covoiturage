@@ -1,5 +1,7 @@
 package bg.alexander.model.validation;
 
+import java.util.Calendar;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -16,10 +18,21 @@ public class ProjectValidator implements ConstraintValidator<ValidProject,Projec
 
 	@Override
 	public boolean isValid(Project project, ConstraintValidatorContext context) {
-		if(project.getCode().equals("123"))
-			return true;
+		if(project.getStart() != null && project.getEnd() != null){
+			if(project.getStart().compareTo(project.getEnd())>0){
+				context.disableDefaultConstraintViolation();
+				context
+					.buildConstraintViolationWithTemplate("{project.form.error.start.date}")
+					.addPropertyNode("start" ).addConstraintViolation();
+				return false;
+			}
+			
+			//TODO finish date validation for current date
+			if (project.getEnd().compareTo(Calendar.getInstance().getTime())<0){
+				
+	        }
+		}
 		
-		return false;
+		return true;
 	}
-
 }

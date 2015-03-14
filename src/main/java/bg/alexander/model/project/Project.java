@@ -11,9 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import bg.alexander.model.user.User;
@@ -22,19 +23,20 @@ import bg.alexander.model.validation.ValidProject;
 @Entity
 @ValidProject
 public class Project {
-	//TODO change to long
 	@Id @GeneratedValue
-	private Integer id;
-	@Min(2)
+	private Long id;
+	@NotNull(message="{project.form.error.name.required}")
+	@Length(min=3, message="{project.form.error.name.length.min}")
 	private String name;
-	
+	@NotBlank(message="{project.form.error.code.required}")
 	private String code;
-	@NotNull
+	@NotNull(message="{project.form.error.start.required}")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date start;
-	@NotNull
+	@NotNull(message="{project.form.error.end.required}")
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date end;
+	@NotNull(message="{project.form.error.creator.required}")
 	@OneToOne
 	private User creator;
 	@OneToMany(fetch=FetchType.EAGER)
@@ -54,11 +56,11 @@ public class Project {
 	public Project() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
