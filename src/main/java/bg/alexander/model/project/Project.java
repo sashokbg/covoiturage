@@ -39,6 +39,8 @@ public class Project {
 	@NotNull(message="{project.form.error.creator.required}")
 	@OneToOne
 	private User creator;
+	
+	@NotNull(message="{project.form.error.users.required}")
 	@OneToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="PROJECT_USERS",
@@ -48,9 +50,7 @@ public class Project {
 	private Set<User> assignedUsers;
 	
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-			name = "TASK",
-			inverseJoinColumns = @JoinColumn(name = "PROJECT_ID"))
+	@JoinColumn(name="PROJECT_ID")
 	private Set<Task> tasks;
 	
 	public Project() {
@@ -118,5 +118,10 @@ public class Project {
 	
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	@Override
+	public String toString(){
+		return "Project "+name+"["+id+"]";
 	}
 }

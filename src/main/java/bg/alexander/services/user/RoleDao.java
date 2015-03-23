@@ -1,7 +1,6 @@
 package bg.alexander.services.user;
 
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -24,12 +23,6 @@ public class RoleDao implements GenerictDaoInterface<Role>{
 		return null;
 	}
 
-	public Set<Role> getAllRoles() {
-		return (Set<Role>) sessionFactory.getCurrentSession().createCriteria(Role.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.list();
-	}
-
 	@Override
 	public Role getById(Long roleId) {
 		return (Role) sessionFactory.getCurrentSession().createCriteria(Role.class).add(Restrictions.eq("id", roleId)).uniqueResult();
@@ -37,8 +30,9 @@ public class RoleDao implements GenerictDaoInterface<Role>{
 
 	@Override
 	public List<Role> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Role>) sessionFactory.getCurrentSession().createCriteria(Role.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+				.list();
 	}
 
 }

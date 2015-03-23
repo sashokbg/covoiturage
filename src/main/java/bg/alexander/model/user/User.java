@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="USER")
 public class User {
@@ -22,6 +24,7 @@ public class User {
     private Long id;
 	private String firstName;
 	private String lastName;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date birthDay;
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name="gender_id")

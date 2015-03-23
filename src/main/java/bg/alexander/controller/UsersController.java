@@ -1,5 +1,7 @@
 package bg.alexander.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import bg.alexander.model.user.Gender;
+import bg.alexander.model.user.Role;
 import bg.alexander.model.user.User;
 import bg.alexander.services.user.UserService;
 
@@ -26,13 +29,15 @@ public class UsersController {
 		return "users/list";
 	}
 	
+	@ModelAttribute("rolesList")
+	public List<Role> setRolesList(){
+		return userService.listRoles();
+	}
+	
 	@RequestMapping(value="create",method=RequestMethod.GET)
 	public String createUserGet(Model model){
-		model.addAttribute("rolesList",userService.listRoles());
 		model.addAttribute("gendersList",Gender.values());
-		User emptyUser = new User();
-		emptyUser.setRoles(userService.listRoles());
-		model.addAttribute("user",emptyUser);
+		model.addAttribute(new User());
 		return "users/create";
 	}
 	

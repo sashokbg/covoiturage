@@ -20,6 +20,7 @@ public class RoleFormatter implements Formatter<Role>{
 	}
 	@Override
 	public Role parse(String id, Locale locale) throws ParseException {
-		return userService.getRole(Long.valueOf(id));
+		Role role = userService.getRole(Long.valueOf(id));
+		return role;
 	}
 }

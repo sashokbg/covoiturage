@@ -21,7 +21,7 @@
 <title><spring:message code="user.form.browser.title" /></title>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.date-picker').datepicker();
+			$('.date-picker').datepicker({dateFormat: "dd/mm/yy"});
 			$('#user-roles').chosen();
 		});
 	</script>
@@ -37,7 +37,7 @@
 				<label for="user-firstName">
 					<spring:message code="user.form.firstName" />:
 				</label>
-				<input id="user-firstName" type="text" name="firstName" />
+				<form:input id="user-firstName" type="text" path="firstName" />
 			</div>
 			<form:select path="gender">
 				<form:options items="${gendersList}"/>
@@ -46,13 +46,13 @@
 				<label for="user-lastName">
 					<spring:message code="user.form.lastName" />:
 				</label>
-				<input id="user-lastName" type="text" name="lastName" />
+				<form:input id="user-lastName" type="text" path="lastName" />
 			</div>
 			<div class="form-group">
 				<label for="user-birthday">
 					<spring:message code="user.form.birthday" />:
 				</label>
-				<input id="user-birthday" class="date-picker" type="text" name="birthDay" />
+				<form:input id="user-birthday" class="date-picker" type="text" path="birthDay" />
 			</div>
 			<div class="form-group">
 				<label for="user-roles">

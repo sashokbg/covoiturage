@@ -22,6 +22,9 @@ public class UserFormatter implements Formatter<User>{
 	@Override
 	public User parse(String userId, Locale locale) throws ParseException {
 		User user = userService.getUser(Long.valueOf(userId)); 
+//		if(user==null){
+//			throw new ParseException("No such user found : id ["+userId+"]", 0);
+//		}
 		return user;
 	}
 }
