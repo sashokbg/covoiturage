@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="schedule" default="jsps" basedir=".">
+	<description>
+		Schedule Ant Builder
+	</description>
+	<!-- set global properties for this build -->
+	<property environment="env"/>
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	
+	<!-- JSPs ONLY -->
+	<target name="jsps">
+		<echo>=== DEPLOY JSP'S ===</echo>
+		<!-- trying to be explicit about what i put out there -->
+		<echo>Copying files to :/${env.TOMCAT_HOME}/webapps/${ant.project.name}/WEB-INF</echo>
+		<copy todir="/${env.TOMCAT_HOME}/webapps/${ant.project.name}/WEB-INF">
+			<fileset dir="../src/main/webapp/WEB-INF">
+				<include name="**/*.jsp" />
+				<include name="**/*.html" />
+				<include name="**/*.css" />
+				<include name="**/*.gif" />
+				<include name="**/*.jpg" />
+				<include name="**/*.png" />
+				<include name="**/*.js" />
+			</fileset>
+		</copy>
+	</target>
+</project>
