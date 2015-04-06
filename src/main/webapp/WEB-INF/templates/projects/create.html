@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	
+	<script th:src="@{/resources/js/jquery-1.11.2.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.js}"></script>
+	<script th:src="@{/resources/js/chosen.jquery.js}"></script>
+	
+	<link rel="stylesheet" th:href="@{/resources/css/jquery-ui.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap-theme.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/chosen.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/common.css}" />
+	
+	<title th:text="#{project.form.browser.title}">Create Project - Schedule</title>
+	<script type="text/javascript" th:inline="text">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			$('.date-picker').datepicker({ dateFormat: '[[#{date.format}]]'});
+			$('#project-users').chosen();
+		});
+		/*]]>*/
+	</script>
+</head>
+<body>
+
+	<!-- [[${#date.format}]] --> 
+
+	<div class="container">
+		<h2 th:text="#{project.form.title}">
+			Create Project 1
+		</h2>
+
+		<form th:object="${project}" th:action="@{/projects/create.do}" method="post">
+			<div class="form-group">
+				<label th:text="#{project.form.name}+':'" for="project-name">
+					First Name:
+				</label>
+				<input id="project-name" type="text" th:field="*{name}" />
+				<p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+					Incorrect Name
+				</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{project.form.code}+':'" for="project-code">Code:</label>
+				<input id="project-code" type="text" th:field="*{code}" />
+				<p class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Incorrect Code</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{project.form.creator}+':'" for="project-creator">
+					Project Creator:
+				</label>
+				<input id="project-creator" type="text" th:field="*{creator}" />
+				<p class="error" th:if="${#fields.hasErrors('creator')}" th:errors="*{creator}">Creator Required</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{project.form.assigned.users}+':'" for="project-users">
+					Assigned Users:
+				</label>
+				<select id="project-users" th:field="*{assignedUsers}" multiple="multiple">
+					<option th:each="user: ${users}" th:text="${user.firstName}" th:value="${{user}}" />
+				</select>
+				<p class="error" th:if="${#fields.hasErrors('assignedUsers')}" th:errors="*{assignedUsers}">Assigned Users needed</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{project.form.start}+':'" for="project-start">Start Date:</label>
+				<input id="project-start" class="date-picker" type="text" th:field="*{start}" />
+				<p class="error" th:if="${#fields.hasErrors('start')}" th:errors="*{start}">Start Date Error</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{project.form.end}+':'" for="project-end">End Date:</label>
+				<input id="project-end" class="date-picker" type="text" th:field="*{end}" />
+				<p class="error" th:if="${#fields.hasErrors('end')}" th:errors="*{end}">End Date Error</p>
+			</div>
+			<div class="form-group">
+				<label for="project-submit" th:text="#{project.form.submit}+':'" >
+					Submit:</label>
+				<input id="project-submit" class="btn btn-default" type="submit" />
+			</div>
+		</form>
+	</div>
+</body>
+</html>

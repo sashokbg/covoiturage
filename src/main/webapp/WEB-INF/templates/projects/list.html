@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<script src="../../../resources/js/jquery-1.11.2.js" th:src="@{/resources/js/jquery-1.11.2.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.js}"></script>
+	<link rel="stylesheet" th:href="@{/resources/css/jquery-ui.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap-theme.css}" />
+	
+	<title th:text="#{project.list.browser.title}">List Projects</title>
+</head>
+<body>
+	<div class="container">
+		<h2 th:text="#{project.list.title}">
+			Projects List
+		</h2>
+
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Code</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Tasks</th>
+						<th>Creator</th>
+						<th>Users</th>
+					</tr>
+				</thead>
+				<tr th:each="project : ${projects}">
+					<td th:text="${project.id}">1</td>
+					<td th:text="${project.name}"></td>
+					<td th:text="${project.code}"></td>
+					<td th:text="${{project.start}}">01-25-2015</td>
+					<td th:text="${{project.end}}">01-25-2016</td>
+					<td>
+						<table>
+							<tr th:each="task : ${project.tasks}">
+								<td th:text="${task.name}">Task 1</td>
+							</tr>
+						</table>
+					</td>
+					<td th:text="${project.creator.firstName}+'-'+${project.creator.lastName}">Alexander - Kirilov</td>
+					<td>
+						<table id="assigned-users">
+							<tr th:each="assignedUser : ${project.assignedUsers}">
+								<td th:text="${assignedUser.firstName}+'-'+${assignedUser.lastName}">
+									Plamena - Dimitrova
+								</td>
+								<td>
+									<ul>
+										<li th:each="role : ${assignedUser.roles}" th:text="#{'role.name.'+${role.name}}">Role</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<a class="btn btn-default" href="@{/projects/create}">Create a new project</a>
+	</div>
+</body>
+</html>

@@ -94,4 +94,14 @@ public class User {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	
+	@Override
+	public boolean equals(Object userObject){
+		User anotherUser = (User) userObject;
+		
+		if(anotherUser.getId().equals(this.getId())){
+			return true;
+		}
+		return false;
+	}
 }

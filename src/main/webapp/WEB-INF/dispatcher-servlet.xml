@@ -18,6 +18,7 @@
 	           <set>
 	                 <ref bean="roleFormatter"/>
 	                 <ref bean="userFormatter"/>
+	                 <ref bean="dateFormatter" />
 	           </set>
 	      </property>
 	</bean>
@@ -53,12 +54,34 @@
 	</mvc:interceptors>
 	<!-- END Spring i18n -->
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
+	<!-- **************************************************************** -->
+	<!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+	<!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+	<!-- **************************************************************** -->
+
+	<bean id="templateResolver"
+	      class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+	  <property name="prefix" value="/WEB-INF/templates/" />
+	  <property name="suffix" value=".html" />
+	  <property name="templateMode" value="HTML5" />
+	  <property name="cacheable" value="false"/>
 	</bean>
+	  
+	<bean id="templateEngine"
+	      class="org.thymeleaf.spring4.SpringTemplateEngine">
+	  <property name="templateResolver" ref="templateResolver" />
+	</bean>
+	 
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	  <property name="templateEngine" ref="templateEngine" />
+	</bean>  
+
+<!-- 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="prefix"> -->
+<!-- 			<value>/WEB-INF/views/</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="suffix"> -->
+<!-- 			<value>.jsp</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 </beans>
