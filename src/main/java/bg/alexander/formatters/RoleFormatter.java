@@ -1,4 +1,4 @@
-package bg.alexander.model.user;
+package bg.alexander.formatters;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
+import bg.alexander.model.user.Role;
 import bg.alexander.services.user.UserService;
 
 @Component("roleFormatter")
