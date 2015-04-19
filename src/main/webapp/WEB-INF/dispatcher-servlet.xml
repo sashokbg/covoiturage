@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
@@ -13,26 +12,29 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
 
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-	      <property name="formatters">
-	           <set>
-	                 <ref bean="roleFormatter"/>
-	                 <ref bean="userFormatter"/>
-	                 <ref bean="dateFormatter" />
-	           </set>
-	      </property>
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<ref bean="roleFormatter" />
+				<ref bean="userFormatter" />
+				<ref bean="dateFormatter" />
+			</set>
+		</property>
 	</bean>
 
 	<!-- Configures @Controller, @RequestMapping and so on -->
 	<mvc:annotation-driven conversion-service="conversionService" />
-	<!-- Maps the location /resources/ to any request starting with /resources/ ex. /resources/js/jQuery.js -->
+	<!-- Maps the location /resources/ to any request starting with /resources/ 
+		ex. /resources/js/jQuery.js -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<!-- Allows @Transactional. Attention this declaration should be used in the same context as <mvc:annotationDriven> other ways it does not work -->
-	<tx:annotation-driven/>
-	<!-- Allows @Autowired -->	
-    <context:annotation-config />
+	<!-- Allows @Transactional. Attention this declaration should be used in 
+		the same context as <mvc:annotationDriven> other ways it does not work -->
+	<tx:annotation-driven />
+	<!-- Allows @Autowired -->
+	<context:annotation-config />
 	<!-- Scan @Component and @Service for autowiring candidates -->
-    <context:component-scan base-package="bg.alexander.*"/>
+	<context:component-scan base-package="bg.alexander.*" />
 
 	<!-- Spring i18n message bundle "reader" -->
 	<bean id="messageSource"
@@ -55,33 +57,38 @@
 	<!-- END Spring i18n -->
 
 	<!-- **************************************************************** -->
-	<!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
-	<!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+	<!-- THYMELEAF-SPECIFIC ARTIFACTS -->
+	<!-- TemplateResolver <- TemplateEngine <- ViewResolver -->
 	<!-- **************************************************************** -->
 
 	<bean id="templateResolver"
-	      class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-	  <property name="prefix" value="/WEB-INF/templates/" />
-	  <property name="suffix" value=".html" />
-	  <property name="templateMode" value="HTML5" />
-	  <property name="cacheable" value="false"/>
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="cacheable" value="false" />
 	</bean>
-	  
-	<bean id="templateEngine"
-	      class="org.thymeleaf.spring4.SpringTemplateEngine">
-	  <property name="templateResolver" ref="templateResolver" />
-	</bean>
-	 
-	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-	  <property name="templateEngine" ref="templateEngine" />
-	</bean>  
 
-<!-- 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-<!-- 		<property name="prefix"> -->
-<!-- 			<value>/WEB-INF/views/</value> -->
-<!-- 		</property> -->
-<!-- 		<property name="suffix"> -->
-<!-- 			<value>.jsp</value> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<!-- These lines add the dialect to Thymeleaf -->
+		<property name="additionalDialects">
+			<set>
+				<bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+			</set>
+		</property>
+	</bean>
+
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+	</bean>
+
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+	<!-- <property name="prefix"> -->
+	<!-- <value>/WEB-INF/views/</value> -->
+	<!-- </property> -->
+	<!-- <property name="suffix"> -->
+	<!-- <value>.jsp</value> -->
+	<!-- </property> -->
+	<!-- </bean> -->
 </beans>

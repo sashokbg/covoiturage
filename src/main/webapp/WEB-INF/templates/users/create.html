@@ -1,68 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<script th:src="@{/resources/js/jquery-1.11.2.js}"></script>
-	<script th:src="@{/resources/js/jquery-ui.js}" ></script>
-	<script th:src="@{/resources/js/bootstrap.js}" ></script>
-	<script th:src="@{/resources/js/chosen.jquery.js}" ></script>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="main-layout">
 	
-	<link rel="stylesheet" th:href="@{/resources/css/jquery-ui.css}" />
-	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.css}"  />
-	<link rel="stylesheet" th:href="@{/resources/css/bootstrap-theme.css}" />
-	<link rel="stylesheet" th:href="@{/resources/css/chosen.css}" />
-
-<title th:text="#{user.form.browser.title}" >Title</title>
-	<script type="text/javascript" th:inline="text">
-		$(document).ready(function() {
-			$('.date-picker').datepicker({dateFormat: "dd/mm/yy"});
-			$('#user-roles').chosen();
-		});
-	</script>
-</head>
-<body>
-	<div class="container">
-		<h2>
-			<spring:message code="user.form.title" />
-		</h2>
-
-		<form:form role="form" action="${pageContext.request.contextPath}/users/create.do" method="post" commandName="user">
-			<div class="form-group">
-				<label for="user-firstName">
-					<spring:message code="user.form.firstName" />:
-				</label>
-				<form:input id="user-firstName" type="text" path="firstName" />
+	<head>
+		<title th:text="#{user.form.browser.title}" >Title</title>
+		<script type="text/javascript" th:inline="text">
+			$(document).ready(function() {
+				$('.date-picker').datepicker({dateFormat: "[[#{date.format}]]"});
+				$('#user-roles').chosen();
+			});
+		</script>
+	</head>
+	<body>
+		<section layout:fragment="content">
+			<div class="main container">
+				<h2 th:text="#{user.form.title}">
+					Title
+				</h2>
+		
+				<form role="form" th:action="@{/users/create.do}" method="post" th:object="${user}">
+					<div class="form-group">
+						<label th:text="#{user.form.firstName}+':'" for="user-firstName">
+							First Name
+						</label>
+						<input id="user-firstName" type="text" th:field="*{firstName}" />
+					</div>
+					<select th:field="*{gender}">
+						<option th:each="gender : ${gendersList}" th:text="${gender}" th:value="${gender}">
+							Gender
+						</option>
+					</select>
+					<div class="form-group">
+						<label for="user-lastName" th:text="#{user.form.lastName}">
+							Last Name
+						</label>
+						<input id="user-lastName" type="text" th:field="*{lastName}" />
+					</div>
+					<div class="form-group">
+						<label for="user-birthday" th:text="#{user.form.birthday}">
+							Birth Day
+						</label>
+						<input id="user-birthday" class="date-picker" type="text" th:field="*{birthDay}" />
+					</div>
+					<div class="form-group">
+						<label for="user-roles" th:text="#{user.form.roles}">
+							Roles
+						</label>
+						<select id="user-roles" th:field="*{roles}" multiple="multiple">
+							<option th:each="role : ${rolesList}" th:value="${{role}}" th:text="${role.name}" />
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="user-submit" th:text="#{user.form.submit}">
+							Submit
+						</label>
+						<input id="user-submit" class="btn btn-default" type="submit" />
+					</div>
+				</form>
 			</div>
-			<form:select path="gender">
-				<form:options items="${gendersList}"/>
-			</form:select>
-			<div class="form-group">
-				<label for="user-lastName">
-					<spring:message code="user.form.lastName" />:
-				</label>
-				<form:input id="user-lastName" type="text" path="lastName" />
-			</div>
-			<div class="form-group">
-				<label for="user-birthday">
-					<spring:message code="user.form.birthday" />:
-				</label>
-				<form:input id="user-birthday" class="date-picker" type="text" path="birthDay" />
-			</div>
-			<div class="form-group">
-				<label for="user-roles">
-					<spring:message code="user.form.roles" />:
-				</label>
-				<form:select id="user-roles" path="roles" multiple="true">
-					<form:options items="${rolesList}" itemValue="id" itemLabel="name" />
-				</form:select>
-			</div>
-			<div class="form-group">
-				<label for="user-submit">
-					<spring:message code="user.form.submit" />:
-				</label>
-				<input id="user-submit" class="btn btn-default" type="submit" />
-			</div>
-		</form:form>
-	</div>
-</body>
+		</section>
+	</body>
 </html>

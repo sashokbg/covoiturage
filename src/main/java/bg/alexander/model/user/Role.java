@@ -9,6 +9,7 @@ public class Role {
 	@Id @GeneratedValue
 	private Long id;
 	private String name;
+	
 	public Long getId() {
 		return id;
 	}
@@ -20,5 +21,15 @@ public class Role {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public boolean equals(Object roleObject){
+		Role anotherRole = (Role) roleObject;
+		
+		if(anotherRole.getId().equals(this.getId())){
+			return true;
+		}
+		return false;
 	}
 }

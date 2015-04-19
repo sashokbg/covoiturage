@@ -17,8 +17,9 @@ public class RoleFormatter implements Formatter<Role>{
 	
 	@Override
 	public String print(Role role, Locale str) {
-		return String.valueOf(role);
+		return String.valueOf(role.getId());
 	}
+	
 	@Override
 	public Role parse(String id, Locale locale) throws ParseException {
 		Role role = userService.getRole(Long.valueOf(id));

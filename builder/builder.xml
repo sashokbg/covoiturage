@@ -14,9 +14,9 @@
 	<target name="jsps">
 		<echo>=== DEPLOY JSP'S ===</echo>
 		<!-- trying to be explicit about what i put out there -->
-		<echo>Copying files to :/${env.TOMCAT_HOME}/webapps/${ant.project.name}/WEB-INF</echo>
-		<copy todir="/${env.TOMCAT_HOME}/webapps/${ant.project.name}/WEB-INF">
-			<fileset dir="../src/main/webapp/WEB-INF">
+		<echo>Copying files to :/${env.TOMCAT_HOME}/webapps/${ant.project.name}/</echo>
+		<copy todir="/${env.TOMCAT_HOME}/webapps/${ant.project.name}/">
+			<fileset dir="../src/main/webapp/">
 				<include name="**/*.jsp" />
 				<include name="**/*.html" />
 				<include name="**/*.css" />

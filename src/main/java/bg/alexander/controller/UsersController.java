@@ -18,10 +18,15 @@ import bg.alexander.model.user.User;
 import bg.alexander.services.user.UserService;
 
 @Controller
-@RequestMapping(value="/users")
+@RequestMapping("/users")
 public class UsersController {
 	@Autowired
 	private UserService userService;
+	
+	@ModelAttribute("page")
+	public String module() {
+		return "users";
+	}
 
 	@RequestMapping(value="list",method=RequestMethod.GET)
 	public String showHomePage(Model model){
