@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import bg.alexander.model.user.Role;
 import bg.alexander.model.user.User;
+import bg.alexander.services.role.RoleDao;
 
 @Service
 @Transactional
@@ -27,10 +28,6 @@ public class UserService {
 
 	public List<User> list() {
 		return userDao.list();
-	}
-	
-	public List<Role> listRoles(){
-		return roleDao.list();
 	}
 	
 	public User saveOrUpdate(User user){

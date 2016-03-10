@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import bg.alexander.model.user.Gender;
 import bg.alexander.model.user.Role;
 import bg.alexander.model.user.User;
+import bg.alexander.services.role.RoleService;
 import bg.alexander.services.user.UserService;
 
 @Controller
@@ -22,13 +23,15 @@ import bg.alexander.services.user.UserService;
 public class UsersController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 	
 	@ModelAttribute("page")
 	public String module() {
 		return "users";
 	}
 
-	@RequestMapping(value="list",method=RequestMethod.GET)
+	@RequestMapping(value={"","list"},method=RequestMethod.GET)
 	public String showHomePage(Model model){
 		model.addAttribute("usersList",userService.getAllUsers());
 		return "users/list";
@@ -36,7 +39,7 @@ public class UsersController {
 	
 	@ModelAttribute("rolesList")
 	public List<Role> setRolesList(){
-		return userService.listRoles();
+		return roleService.listRoles();
 	}
 	
 	@RequestMapping(value="create",method=RequestMethod.GET)

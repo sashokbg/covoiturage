@@ -6,14 +6,6 @@
 	
 <head>
 	<title th:text="#{project.form.browser.title}">Create Project - Schedule</title>
-	<script type="text/javascript" th:inline="text">
-		/*<![CDATA[*/
-		$(document).ready(function() {
-			$('.date-picker').datepicker({ dateFormat: '[[#{date.format}]]'});
-			$('#project-users').chosen();
-		});
-		/*]]>*/
-	</script>
 </head>
 <body>
 	<section layout:fragment="content">

@@ -1,24 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form"
-    prefix="form"%>
-
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="main-layout">
+
 <head>
-	<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
-	<script src="<c:url value="/resources/js/jquery-ui.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
-	<script src="<c:url value="/resources/js/chosen.jquery.js" />"></script>
-	
-	<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css" />" />
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.css" />" />
-	<link rel="stylesheet" href="<c:url value="/resources/css/chosen.css" />" />
-	<link rel="stylesheet" href="<c:url value="/resources/css/common.css" />" />
-	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title><spring:message code="project.form.browser.title" /></title>
 	<script type="text/javascript">

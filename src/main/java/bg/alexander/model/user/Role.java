@@ -3,11 +3,14 @@ package bg.alexander.model.user;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Role {
 	@Id @GeneratedValue
 	private Long id;
+	@NotNull @Size(min=3,max=15)
 	private String name;
 	
 	public Long getId() {
@@ -24,12 +27,16 @@ public class Role {
 	}
 	
 	@Override
-	public boolean equals(Object roleObject){
-		Role anotherRole = (Role) roleObject;
-		
-		if(anotherRole.getId().equals(this.getId())){
-			return true;
+	public boolean equals(Object anotherRoleObj){
+		if(anotherRoleObj==null)
+			return false;
+		Role anotherRole = (Role) anotherRoleObj;
+		if(this.getId() != null && anotherRole.getId() !=null){
+			if(anotherRole.getId().equals(this.getId())){
+				return true;
+			}
 		}
+		
 		return false;
 	}
 }

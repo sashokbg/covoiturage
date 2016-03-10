@@ -5,14 +5,16 @@
 	layout:decorator="main-layout">
 	
 	<head>
-		<title th:text="#{user.form.browser.title}" >Title</title>
-		<script type="text/javascript" th:inline="text">
+		<script type="text/javascript">
+			/*<![CDATA[*/
 			$(document).ready(function() {
-				$('.date-picker').datepicker({dateFormat: "[[#{date.format}]]"});
-				$('#user-roles').chosen();
+				$('.date-picker').datepicker({ dateFormat: '[[#{date.format}]]'});
+				$('#project-users').chosen();
 			});
+			/*]]>*/
 		</script>
 	</head>
+	
 	<body>
 		<section layout:fragment="content">
 			<div class="main container">

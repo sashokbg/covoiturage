@@ -17,6 +17,5 @@ public @interface ValidProject {
     String message() default "{project.form.error.code}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-       
 }
 

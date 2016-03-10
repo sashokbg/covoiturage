@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +24,6 @@ public class ProjectsController {
 	private UserService userService;
 	@Autowired
 	private ProjectService projectService;
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	@ModelAttribute("page")
 	public String module() {
@@ -54,7 +51,7 @@ public class ProjectsController {
 		return "redirect:/projects/list";
 	}
 	
-	@RequestMapping(value="list")
+	@RequestMapping(value={"","list"})
 	public String listProjects(Model model){
 		model.addAttribute("projects",projectService.list());
 		return "projects/list";

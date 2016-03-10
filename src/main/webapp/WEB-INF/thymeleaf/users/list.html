@@ -4,9 +4,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="main-layout">
 	
-<head>
-	<title th:text="#{user.list.browser.title}">Title users list</title>
-</head>
+	<head>
+		<title th:text="#{user.list.browser.title}">Title users list</title>
+		<script type="text/javascript" layout:fragment="custom-js">
+			/*<![CDATA[*/
+			$(document).ready(function() {
+				$('.date-picker').datepicker({ dateFormat: '[[#{date.format}]]'});
+				$('#project-users').chosen();
+			});
+			/*]]>*/
+		</script>
+	</head>
 <body>
 	<section layout:fragment="content">
 		<div class="main container">
