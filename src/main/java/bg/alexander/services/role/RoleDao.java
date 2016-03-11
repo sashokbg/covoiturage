@@ -19,8 +19,8 @@ public class RoleDao implements GenerictDaoInterface<Role>{
 	
 	@Override
 	public Role saveOrUpdate(Role entity) {
-		// TODO Auto-generated method stub
-		return null;
+		sessionFactory.getCurrentSession().save(entity);
+		return entity;
 	}
 
 	@Override

@@ -28,19 +28,24 @@ public class RolesController {
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String manageRoles(@ModelAttribute("role") Role role, Model model){
+	public String manageRoles(Model model){
+		if(!model.containsAttribute("role")){
+			model.addAttribute(new Role());
+		}
 		return "users/roles";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String createRolePost(@Valid @ModelAttribute("role") Role role, BindingResult binding, Model model, RedirectAttributes ra){
-		if (binding.hasErrors()) {
+	public String createRolePost(@Valid @ModelAttribute("role") Role role, BindingResult bindingResult, Model model, RedirectAttributes ra){
+		if (bindingResult.hasErrors()) {
 			ra.addFlashAttribute("role",role);
-			ra.addFlashAttribute("org.springframework.validation.BindingResult.role", binding);
+			ra.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX+"role", bindingResult);
+			
 			return "redirect:/roles";
         }
 		
 		roleService.saveOrUpdate(role);
+		ra.addFlashAttribute("message","role.save.success");
 		return "redirect:/roles";
 	}
 }

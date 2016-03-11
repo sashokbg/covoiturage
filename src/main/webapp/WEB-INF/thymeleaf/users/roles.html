@@ -14,24 +14,29 @@
 				Manage Roles
 			</h2>
 			<form th:object="${role}" th:action="@{/roles/create.do}" method="post">
-				<div class="table-responsive">
+				<div class="row">
+					
+				</div>
+				<div class="table-responsive table-hover">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>Name</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
-						<tr th:each="otherRole : ${roles}" th:object="${otherRole}">
+						<tr th:each="otherRole : ${rolesList}" th:object="${otherRole}">
 							<td th:text="${otherRole.id}">id</td>
 							<td th:text="${otherRole.name}">Name</td>
+							<td><a href="@{/roles/delete.do" ><span class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 						<tr>
 							<td></td>
 							<td>
-								<input type="text" th:field="*{name}"/> d
-								<ul>
-								  <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+								<input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')}? error"/>
+								<ul th:if="${#fields.hasErrors('name')}" class="error">
+								 	<li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
 								</ul>
 							</td>
 						</tr>
