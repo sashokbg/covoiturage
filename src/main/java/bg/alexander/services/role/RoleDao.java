@@ -35,4 +35,9 @@ public class RoleDao implements GenerictDaoInterface<Role>{
 				.list();
 	}
 
+	@Override
+	public void delete(Long id) {
+		sessionFactory.getCurrentSession().delete(getById(id));
+	}
+
 }

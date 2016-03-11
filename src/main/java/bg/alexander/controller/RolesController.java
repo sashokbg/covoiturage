@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bg.alexander.model.user.Role;
@@ -33,6 +34,13 @@ public class RolesController {
 			model.addAttribute(new Role());
 		}
 		return "users/roles";
+	}
+	
+	@RequestMapping(value="delete",method=RequestMethod.GET)
+	public String deleteRole(@RequestParam Long id, RedirectAttributes ra){
+		roleService.delete(id);
+		ra.addFlashAttribute("message","role.delete.success");
+		return "redirect:/roles";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)

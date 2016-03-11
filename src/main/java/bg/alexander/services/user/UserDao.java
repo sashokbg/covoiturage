@@ -37,4 +37,9 @@ public class UserDao implements GenerictDaoInterface<User>{
 		sessionFactory.getCurrentSession().save(entity);
 		return entity;
 	}
+
+	@Override
+	public void delete(Long id) {
+		sessionFactory.getCurrentSession().delete(getById(id));
+	}
 }

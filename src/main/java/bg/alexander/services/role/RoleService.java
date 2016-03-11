@@ -22,4 +22,8 @@ public class RoleService {
 	public List<Role> listRoles(){
 		return roleDao.list();
 	}
+	
+	public void delete(Long roleId){
+		roleDao.delete(roleId);
+	}
 }

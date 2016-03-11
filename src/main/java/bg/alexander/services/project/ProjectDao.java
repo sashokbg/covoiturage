@@ -46,4 +46,9 @@ public class ProjectDao implements GenerictDaoInterface<Project> {
 		return (Project) sessionFactory.getCurrentSession().
 				createCriteria(Project.class).add(Restrictions.eq("id", id)).uniqueResult();
 	}
+
+	@Override
+	public void delete(Long id) {
+		sessionFactory.getCurrentSession().delete(getById(id));
+	}
 }

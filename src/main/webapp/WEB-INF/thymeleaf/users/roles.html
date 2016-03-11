@@ -29,7 +29,7 @@
 						<tr th:each="otherRole : ${rolesList}" th:object="${otherRole}">
 							<td th:text="${otherRole.id}">id</td>
 							<td th:text="${otherRole.name}">Name</td>
-							<td><a href="@{/roles/delete.do" ><span class="glyphicon glyphicon-trash"></span></a></td>
+							<td><a th:href="@{/roles/delete.do?id=__${otherRole.id}__}" ><span class="glyphicon glyphicon-trash"></span></a></td>
 						</tr>
 						<tr>
 							<td></td>
