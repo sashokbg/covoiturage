@@ -7,6 +7,8 @@
 * tomcat-catalina 7.0.57
 
 ###Model
+* MySQL
+  * FlyWay migration tool
 * hibernate 4.3.8.Final
   * LocalSessionFactoryBean - Allows **dataSource** and **packagesToScan**
   * HibernateTransactionManager - Allows auto managing for transactions with **@Transactional** annotation

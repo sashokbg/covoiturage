@@ -11,7 +11,6 @@
 	<!-- Only certain versions of Spring and Hibernate are compatible ! -->
 	<properties>
 		<spring.version>4.1.4.RELEASE</spring.version>
-<!-- 		<hibernate.version>3.6.10.Final</hibernate.version> -->
 			<hibernate.version>4.3.8.Final</hibernate.version>
 		<tiles.version>3.0.5</tiles.version>
 	</properties>
@@ -20,6 +19,21 @@
 		<finalName>schedule</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
+		<!-- Database init plugin -->
+			<plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/schedule</url>
+                    <user>root</user>
+                    <password>toor</password>
+                    <locations>
+                    	<location>filesystem:src/main/resources/db</location>
+                    </locations>
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                </configuration>
+            </plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
