@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -22,6 +23,7 @@ import bg.alexander.model.validation.ValidProject;
 
 @Entity
 @ValidProject
+@Table(name="PROJECT")
 public class Project {
 	@Id @GeneratedValue
 	private Long id;

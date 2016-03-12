@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema schedule
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `schedule` ;
 
 -- -----------------------------------------------------
 -- Schema schedule
@@ -15,9 +16,9 @@ CREATE SCHEMA IF NOT EXISTS `schedule` DEFAULT CHARACTER SET utf8 ;
 USE `schedule` ;
 
 -- -----------------------------------------------------
--- Table `schedule`.`Gender`
+-- Table `schedule`.`GENDER`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`Gender` (
+CREATE TABLE IF NOT EXISTS `schedule`.`GENDER` (
   `id` INT NOT NULL,
   `gender` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -25,9 +26,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`User`
+-- Table `schedule`.`USER`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`User` (
+CREATE TABLE IF NOT EXISTS `schedule`.`USER` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `gender_id` INT NOT NULL,
   `firstName` VARCHAR(64) NULL,
@@ -37,16 +38,16 @@ CREATE TABLE IF NOT EXISTS `schedule`.`User` (
   INDEX `fk_User_Gender_idx` (`gender_id` ASC),
   CONSTRAINT `fk_User_Gender`
     FOREIGN KEY (`gender_id`)
-    REFERENCES `schedule`.`Gender` (`id`)
+    REFERENCES `schedule`.`GENDER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`Project`
+-- Table `schedule`.`PROJECT`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`Project` (
+CREATE TABLE IF NOT EXISTS `schedule`.`PROJECT` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(256) NULL,
   `start` DATETIME NULL,
@@ -57,16 +58,16 @@ CREATE TABLE IF NOT EXISTS `schedule`.`Project` (
   INDEX `fk_Project_User1_idx` (`creator_id` ASC),
   CONSTRAINT `fk_Project_User1`
     FOREIGN KEY (`creator_id`)
-    REFERENCES `schedule`.`User` (`id`)
+    REFERENCES `schedule`.`USER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`Task`
+-- Table `schedule`.`TASK`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`Task` (
+CREATE TABLE IF NOT EXISTS `schedule`.`TASK` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Project_id` INT NOT NULL,
   `Name` VARCHAR(45) NULL,
@@ -78,16 +79,16 @@ CREATE TABLE IF NOT EXISTS `schedule`.`Task` (
   INDEX `fk_Task_Project1_idx` (`Project_id` ASC),
   CONSTRAINT `fk_Task_Project1`
     FOREIGN KEY (`Project_id`)
-    REFERENCES `schedule`.`Project` (`id`)
+    REFERENCES `schedule`.`PROJECT` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`Role`
+-- Table `schedule`.`ROLES`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`Role` (
+CREATE TABLE IF NOT EXISTS `schedule`.`ROLES` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -95,9 +96,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`Project_Users`
+-- Table `schedule`.`PROJECT_USERS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`Project_Users` (
+CREATE TABLE IF NOT EXISTS `schedule`.`PROJECT_USERS` (
   `Project_id` INT NOT NULL,
   `User_id` INT NOT NULL,
   PRIMARY KEY (`Project_id`, `User_id`),
@@ -105,21 +106,21 @@ CREATE TABLE IF NOT EXISTS `schedule`.`Project_Users` (
   INDEX `fk_Project_has_User_Project1_idx` (`Project_id` ASC),
   CONSTRAINT `fk_Project_has_User_Project1`
     FOREIGN KEY (`Project_id`)
-    REFERENCES `schedule`.`Project` (`id`)
+    REFERENCES `schedule`.`PROJECT` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Project_has_User_User1`
     FOREIGN KEY (`User_id`)
-    REFERENCES `schedule`.`User` (`id`)
+    REFERENCES `schedule`.`USER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `schedule`.`User_Roles`
+-- Table `schedule`.`USER_ROLES`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`User_Roles` (
+CREATE TABLE IF NOT EXISTS `schedule`.`USER_ROLES` (
   `User_id` INT NOT NULL,
   `Role_id` INT NOT NULL,
   PRIMARY KEY (`User_id`, `Role_id`),
@@ -127,12 +128,12 @@ CREATE TABLE IF NOT EXISTS `schedule`.`User_Roles` (
   INDEX `fk_User_has_Role_User1_idx` (`User_id` ASC),
   CONSTRAINT `fk_User_has_Role_User1`
     FOREIGN KEY (`User_id`)
-    REFERENCES `schedule`.`User` (`id`)
+    REFERENCES `schedule`.`USER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_has_Role_Role1`
     FOREIGN KEY (`Role_id`)
-    REFERENCES `schedule`.`Role` (`id`)
+    REFERENCES `schedule`.`ROLES` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
