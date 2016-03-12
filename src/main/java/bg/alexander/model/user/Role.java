@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="ROLES")
+@Table(name="ROLE")
 public class Role {
 	@Id @GeneratedValue
 	private Long id;
