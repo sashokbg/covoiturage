@@ -1,1 +1,0 @@
-rename table ROLES to ROLE; 

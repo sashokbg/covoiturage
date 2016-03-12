@@ -9,6 +9,7 @@
 ###Model
 * MySQL
   * FlyWay migration tool
+    Use **mvn flyway:migrate** to update schema to latest version
 * hibernate 4.3.8.Final
   * LocalSessionFactoryBean - Allows **dataSource** and **packagesToScan**
   * HibernateTransactionManager - Allows auto managing for transactions with **@Transactional** annotation
