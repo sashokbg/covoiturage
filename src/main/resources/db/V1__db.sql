@@ -6,31 +6,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Table `schedule`.`GENDER`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `schedule`.`GENDER` (
-  `id` INT NOT NULL,
-  `gender` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `schedule`.`USER`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `schedule`.`USER` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `gender_id` INT NOT NULL,
+  `gender` INT NOT NULL,
   `firstName` VARCHAR(64) NULL,
   `lastName` VARCHAR(64) NULL,
   `birthDay` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_User_Gender_idx` (`gender_id` ASC),
-  CONSTRAINT `fk_User_Gender`
-    FOREIGN KEY (`gender_id`)
-    REFERENCES `schedule`.`GENDER` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 

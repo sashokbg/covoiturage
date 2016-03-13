@@ -3,7 +3,6 @@ package bg.alexander.model.user;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,7 +26,6 @@ public class User {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date birthDay;
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name="gender_id")
 	private Gender gender;
 	
 	//TODO change to lazy ? OpenSessionInView ?

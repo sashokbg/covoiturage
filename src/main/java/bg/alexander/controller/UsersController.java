@@ -1,5 +1,6 @@
 package bg.alexander.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bg.alexander.model.user.Gender;
 import bg.alexander.model.user.Role;
@@ -42,20 +44,28 @@ public class UsersController {
 		return roleService.listRoles();
 	}
 	
+	@ModelAttribute("gendersList")
+	public List<Gender> setGenderList(){
+		return Arrays.asList(Gender.values());
+	}
+	
 	@RequestMapping(value="create",method=RequestMethod.GET)
 	public String createUserGet(Model model){
-		model.addAttribute("gendersList",Gender.values());
-		model.addAttribute(new User());
+		if(!model.containsAttribute("user")){
+			model.addAttribute("user",new User());
+		}
 		return "users/create";
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String createUserPost(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model){
+	public String createUserPost(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model, RedirectAttributes ra){
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("user",user);
-			return "users/create";
+			ra.addFlashAttribute("user",user);
+			ra.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX+"user");
+			return "redirect:users/create";
         }
 		
+		ra.addFlashAttribute("message","user.save.success");
 		userService.saveOrUpdate(user);
 		return "redirect:/users/list";
 	}
